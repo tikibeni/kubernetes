@@ -8,17 +8,18 @@ fun getRandomString() : String {
     return java.util.UUID.randomUUID().toString()
 }
 
-fun printWithSchedule() {
+fun printWithSchedule(printable: String) {
     Timer("generate", false).schedule(5000) {
         println(DateTimeFormatter.ISO_INSTANT
             .withZone(ZoneId.of("Europe/Helsinki"))
             .format(Instant.now())
-                + ": ${getRandomString()}")
-        printWithSchedule()
+                + ": $printable")
+        printWithSchedule(printable)
     }
 }
 
 fun main() {
-    printWithSchedule()
+    val printable = getRandomString()
+    printWithSchedule(printable)
 }
 
